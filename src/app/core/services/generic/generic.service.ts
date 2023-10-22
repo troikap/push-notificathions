@@ -13,8 +13,8 @@ export class GenericService {
     private http: HttpClient
   ) { }
 
-  async setToken( token: string ): Promise<any>{
-    const response: any = await lastValueFrom(this.http.post(`${this.pathApiUrl}/tokens`, {token}));
+  async setToken( token: string, user?: string ): Promise<any>{
+    const response: any = await lastValueFrom(this.http.post(`${this.pathApiUrl}/tokens`, {token, user}));
     return response;
   }
 

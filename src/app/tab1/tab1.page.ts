@@ -4,6 +4,7 @@ import { PushNotificationService } from '../core/services/push-notification/push
 import { StorageProvider } from '../core/providers/storage/storage.provider';
 import { ToastProvider } from '../core/providers/toast/toast.provider';
 import { ErrorProvider } from '../core/providers/error/error.provider';
+import { AlertController } from '@ionic/angular';
 
 @Component({
   selector: 'app-tab1',
@@ -27,7 +28,8 @@ export class Tab1Page {
     private pushNotificationService: PushNotificationService,
     private storageProvider: StorageProvider,
     private toastProvider: ToastProvider,
-    private errorProvider: ErrorProvider
+    private errorProvider: ErrorProvider,
+    private alertController: AlertController
   ) {}
 
   async onClickSignUp() {
@@ -35,15 +37,38 @@ export class Tab1Page {
       await this.pushNotificationService.registerPush();
       const token = await this.storageProvider.getObject('TOKEN');
       if (!token) return this.toastProvider.presentToast('Problemas al obtener token', 3000, 'warning');
-      const response = await this.genericService.setToken(token);
+      const alert = await this.alertController.create({
+        header: 'Usuario',
+        subHeader: 'Ingrese el nombre de su usuario',
+        buttons: [
+          {
+            text: 'Cancelar',
+            role: 'cancel',
+            cssClass: 'alert-button-primary'
+          },
+          {
+            text: 'Continuar',
+            role: 'confirm',
+            cssClass: 'alert-button-secondary'
+          },
+        ],
+        inputs: [
+            {
+              name: 'name',
+              placeholder: 'Nombre',
+            },
+          ]
+      });
+      await alert.present();
+      const alertResult = await alert.onDidDismiss();
+      const userName = alertResult.data.values['name'];
+      const response = await this.genericService.setToken(token, userName);
       if (response) {
         this.toastProvider.presentToast('Token registrado correctamente', 3000, 'success');
         this.tokens = response.data.map((element: any) => {
           element.checked = false;
           return element;
         });
-        console.log('TOKKEN SETEADOS ', this.tokens);
-        
       }
     } catch (err) {
       console.log('ERROR ', err);
