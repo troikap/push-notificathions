@@ -1,25 +1,39 @@
 import { Injectable } from '@angular/core';
 import { PushNotifications } from '@capacitor/push-notifications';
+import { StorageProvider } from '../../providers/storage/storage.provider';
 
 @Injectable({
   providedIn: 'root'
 })
 export class PushNotificationService {
-  public token: string = '';
 
-  constructor() { }
+  constructor(
+    private storageProvider: StorageProvider
+  ) {}
 
   async registerPush(): Promise<any>{
-    await this.registerNotifications();
+    const token = await this.storageProvider.getObject('TOKEN');
+    console.log('TOKEN ?? ', token);
+    if (!token) await this.registerNotifications();
     await this.addListeners();
     await this.getDeliveredNotifications();
-    return this.token;
+  }
+
+  registerNotifications = async () => {
+    let permStatus = await PushNotifications.checkPermissions();
+    if (permStatus.receive === 'prompt') {
+      permStatus = await PushNotifications.requestPermissions();
+    }
+    if (permStatus.receive !== 'granted') {
+      throw new Error('User denied permissions!');
+    }
+    await PushNotifications.register();
   }
 
   addListeners = async () => {
-    await PushNotifications.addListener('registration', token => {
+    await PushNotifications.addListener('registration', async token => {
       console.info('Registration token: ', token.value);
-      this.token = token.value;
+      await this.storageProvider.setObject('TOKEN', token.value);
     });
     await PushNotifications.addListener('registrationError', err => {
       console.error('Registration error: ', err.error);
@@ -30,17 +44,6 @@ export class PushNotificationService {
     await PushNotifications.addListener('pushNotificationActionPerformed', notification => {
       console.log('Push notification action performed', notification.actionId, notification.inputValue);
     });
-  }
-  
-  registerNotifications = async () => {
-    let permStatus = await PushNotifications.checkPermissions();
-    if (permStatus.receive === 'prompt') {
-      permStatus = await PushNotifications.requestPermissions();
-    }
-    if (permStatus.receive !== 'granted') {
-      throw new Error('User denied permissions!');
-    }
-    await PushNotifications.register();
   }
   
   getDeliveredNotifications = async () => {

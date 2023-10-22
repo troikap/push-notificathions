@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  API_URL: "http:localhost:9000/api"
+  API_URL: "https://g2f0hhh3-9000.brs.devtunnels.ms/api"
 };
 
 /*

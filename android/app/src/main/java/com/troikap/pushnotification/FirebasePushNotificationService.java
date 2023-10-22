@@ -42,18 +42,21 @@ public class FirebasePushNotificationService extends FirebaseMessagingService {
     Map<String, String> data = remoteMessage.getData();
     String title = data.get("title");
     String message = data.get("body");
-    String pictureUrl = data.get("picture");
+    String pictureUrl = data.get("image");
     String contentAction = data.get("contentAction");
     String contentSref = data.get("contentSref");
     String contentParams = data.get("contentParams");
     this.showNotification(title, message, pictureUrl, contentAction, contentSref, contentParams);
-
-    // It's important to call this to receive the message in the ionic application and not only in the JAVA part of the app.
     PushNotificationsPlugin.sendRemoteMessage(remoteMessage);
   }
 
-
   private void showNotification(String title, String message, String pictureUrl, String contentAction, String contentSref, String contentParams) {
+    Log.d(TAG, "title: " + title);
+    Log.d(TAG, "message: " + message);
+    Log.d(TAG, "pictureUrl: " + pictureUrl);
+    Log.d(TAG, "contentAction: " + contentAction);
+    Log.d(TAG, "contentSref: " + contentSref);
+    Log.d(TAG, "contentParams: " + contentParams);
     String channel = "channelId1234";
     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
       NotificationChannel channel1 = new NotificationChannel(

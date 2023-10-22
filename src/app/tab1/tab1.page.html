@@ -9,12 +9,22 @@
 <ion-content [fullscreen]="true">
   <ion-header collapse="condense">
     <ion-toolbar>
-      <ion-title size="large">Tab 1 aaaa</ion-title>
-      
+      <ion-title size="large">Tab 1</ion-title>
     </ion-toolbar>
   </ion-header>
-  
+  <app-explore-container name="Tab 1 page"></app-explore-container>
+  <ion-button (click)="onClickHello()">HOLA</ion-button>
   <ion-button (click)="onClickSignUp()">Registrar</ion-button>
   <ion-button (click)="onClickGetToken()">Obtener</ion-button>
-  <app-explore-container name="Tab 1 page bbbb"></app-explore-container>
+
+  <ion-card>
+    <ion-input [(ngModel)]="title">Mensaje</ion-input>
+    <ion-input [(ngModel)]="message">Cuerpo del mensaje</ion-input>
+    <ion-input [(ngModel)]="image">Url de imagen</ion-input>
+    
+    <ion-item *ngFor="let token of tokens">
+      <ion-checkbox color=secondary slot="start" class="" name="checkbox" [(ngModel)]="token.checked" ngDefaultControl>{{token.user}}</ion-checkbox>
+    </ion-item>
+    <ion-button (click)="onClickSendMessage()">Enviar Mensaje</ion-button>
+  </ion-card>
 </ion-content>

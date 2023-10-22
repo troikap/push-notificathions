@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { StorageProvider } from './core/providers/storage/storage.provider';
 
 @Component({
   selector: 'app-root',
@@ -6,6 +7,10 @@ import { Component } from '@angular/core';
   styleUrls: ['app.component.scss'],
 })
 export class AppComponent {
-  constructor() {}
 
+  constructor(
+    private storageProvider: StorageProvider
+  ) {
+    this.storageProvider.init();
+  }
 }
