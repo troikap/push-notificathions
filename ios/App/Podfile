@@ -6,6 +6,12 @@ use_frameworks!
 # workaround to avoid Xcode caching of Pods that requires
 # Product -> Clean Build Folder after new Cordova plugins installed
 # Requires CocoaPods 1.6 or newer
+pod 'FirebaseAnalytics', '10.2.0', :modular_headers => true
+pod 'FirebaseCrashlytics', '10.2.0', :modular_headers => true
+pod 'GoogleUtilities', '7.10.0', :modular_headers => true
+pod 'FirebaseCore', :modular_headers => true
+pod 'FirebaseMessaging', :modular_headers => true
+
 install! 'cocoapods', :disable_input_output_paths => true
 
 def capacitor_pods
