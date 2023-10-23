@@ -90,7 +90,7 @@ export class Tab1Page {
 
   async onClickGetToken() {
     const token = await this.storageProvider.getObject('TOKEN');
-    if (token) this.toastProvider.presentToast('Tenes seteado el token', 3000, 'success');
+    if (token) this.toastProvider.presentToast(`Tenes seteado el token ${token}`, 7000, 'success');
     else this.toastProvider.presentToast('No tenes seteado el token', 3000, 'warning');
   }
 
