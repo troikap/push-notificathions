@@ -4,9 +4,10 @@ import { Storage } from '@ionic/storage-angular';
 const parametric: any = {
   TOKENS: 'tokens',
   TOKEN: 'token',
-  HELLO: 'hello'
+  HELLO: 'hello',
+  TOKEN_DATA: 'token-data'
 };
-type StorageData = | "TOKENS" | "TOKEN" | "HELLO";
+type StorageData = | "TOKENS" | "TOKEN" | "HELLO" | "TOKEN_DATA";
 
 @Injectable({
   providedIn: 'root'

@@ -32,7 +32,9 @@ export class PushNotificationService {
 
   addListeners = async () => {
     await PushNotifications.addListener('registration', async token => {
-      console.info('Registration token: ', token.value);
+      console.info('Registration token: ', token);
+      console.info('Registration token.value: ', token.value);
+      await this.storageProvider.setObject('TOKEN_DATA', token);
       await this.storageProvider.setObject('TOKEN', token.value);
     });
     await PushNotifications.addListener('registrationError', err => {
