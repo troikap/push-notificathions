@@ -14,7 +14,7 @@ export class PushNotificationService {
   async registerPush(): Promise<any>{
     const token = await this.storageProvider.getObject('TOKEN');
     console.log('TOKEN ?? ', token);
-    if (!token) await this.registerNotifications();
+    await this.registerNotifications();
     await this.addListeners();
     await this.getDeliveredNotifications();
   }
@@ -49,5 +49,10 @@ export class PushNotificationService {
   getDeliveredNotifications = async () => {
     const notificationList = await PushNotifications.getDeliveredNotifications();
     console.log('delivered notifications', notificationList);
+  }
+
+  async onlyRegister() {
+    let permStatus = await PushNotifications.checkPermissions();
+
   }
 }
