@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { PushNotifications } from '@capacitor/push-notifications';
 import { StorageProvider } from '../../providers/storage/storage.provider';
+import { FCM } from '@capacitor-community/fcm';
+import { Capacitor } from '@capacitor/core';
 
 @Injectable({
   providedIn: 'root'
@@ -37,7 +39,13 @@ export class PushNotificationService {
       console.info('Registration token: ', token);
       console.info('Registration token.value: ', token.value);
       await this.storageProvider.setObject('TOKEN_DATA', token);
-      await this.storageProvider.setObject('TOKEN', token.value);
+      if (Capacitor.getPlatform() === 'ios') {    
+        FCM.getToken() .then((r) => {
+          console.log('AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA ', r.token);
+          
+          // this.sendDeviceTokenToAPI(r.token, 'FCM') })
+        }).catch((err) => console.log('Error getting token with FCM: ', err)); 
+      }
     });
     await PushNotifications.addListener('registrationError', err => {
       console.error('Registration error: ', err.error);
