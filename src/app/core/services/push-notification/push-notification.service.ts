@@ -39,7 +39,7 @@ export class PushNotificationService {
       console.info('Registration token: ', token);
       console.info('Registration token.value: ', token.value);
       if (Capacitor.getPlatform() === 'ios') {    
-        FCM.getToken().then( async (r) => {
+        await FCM.getToken().then( async (r) => {
           console.log('AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA ', r.token);
           await this.storageProvider.setObject('TOKEN_DATA', r.token);
         }).catch((err) => console.log('Error getting token with FCM: ', err)); 
