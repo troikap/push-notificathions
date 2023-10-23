@@ -25,7 +25,8 @@
     <ion-input [(ngModel)]="image">Url de imagen</ion-input>
     
     <ion-item *ngFor="let token of tokens">
-      <ion-checkbox color=secondary slot="start" class="" name="checkbox" [(ngModel)]="token.checked" ngDefaultControl>{{token.user}}</ion-checkbox>
+      <ion-label>{{token.user}}</ion-label>
+      <ion-checkbox color=secondary slot="start" name="checkbox" [(ngModel)]="token.checked" ngDefaultControl></ion-checkbox>
     </ion-item>
     <ion-button (click)="onClickSendMessage()">Enviar Mensaje</ion-button>
   </ion-card>
