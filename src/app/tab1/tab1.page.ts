@@ -70,7 +70,7 @@ export class Tab1Page {
     }
   }
 
-  async onClickGetToken() {
+  async onClickGetTokens() {
     try {
       const response = await this.genericService.getToken();
       if (response) {
@@ -86,6 +86,12 @@ export class Tab1Page {
       console.log('ERROR ', err);
       this.errorProvider.errorHandler(err);
     }
+  }
+
+  async onClickGetToken() {
+    const token = await this.storageProvider.getObject('TOKEN');
+    if (token) this.toastProvider.presentToast('Tenes seteado el token', 3000, 'success');
+    else this.toastProvider.presentToast('No tenes seteado el token', 3000, 'warning');
   }
 
   async onClickHello() {
@@ -118,5 +124,9 @@ export class Tab1Page {
       console.log('ERROR ', err);
       this.errorProvider.errorHandler(err);
     }
+  }
+
+  onClickPermission() {
+    this.pushNotificationService.onlyGetPermission();
   }
 }

@@ -14,8 +14,10 @@
   </ion-header>
   <app-explore-container name="Tab 1 page"></app-explore-container>
   <ion-button (click)="onClickHello()">Prueba servidor</ion-button>
+  <ion-button (click)="onClickPermission()">Chequear permisos</ion-button>
   <ion-button (click)="onClickSignUp()">Registrar token api</ion-button>
-  <ion-button (click)="onClickGetToken()">Obtener tokens</ion-button>
+  <ion-button (click)="onClickGetTokens()">Obtener tokens</ion-button>
+  <ion-button (click)="onClickGetToken()">Consultar mi token</ion-button>
 
   <ion-card>
     <ion-input [(ngModel)]="title">Titulo del mensaje</ion-input>

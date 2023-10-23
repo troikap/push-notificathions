@@ -14,7 +14,7 @@ export class PushNotificationService {
   async registerPush(): Promise<any>{
     const token = await this.storageProvider.getObject('TOKEN');
     console.log('TOKEN ?? ', token);
-    await this.registerNotifications();
+    if (!token) await this.registerNotifications();
     await this.addListeners();
     await this.getDeliveredNotifications();
   }
@@ -51,8 +51,13 @@ export class PushNotificationService {
     console.log('delivered notifications', notificationList);
   }
 
-  async onlyRegister() {
+  async onlyGetPermission() {
     let permStatus = await PushNotifications.checkPermissions();
-
+    if (permStatus.receive === 'prompt') {
+      permStatus = await PushNotifications.requestPermissions();
+    }
+    if (permStatus.receive !== 'granted') {
+      throw new Error('User denied permissions!');
+    }
   }
 }
