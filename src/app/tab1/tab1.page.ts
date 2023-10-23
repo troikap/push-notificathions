@@ -28,8 +28,14 @@ export class Tab1Page {
 
   async onClickSignUp() {
     try {
+      console.log('ZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZ');
       await this.pushNotificationService.registerPush();
+
+      console.log('YYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYY');
       const token = await this.storageProvider.getObject('TOKEN');
+      console.log('RRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRr');
+
+
       if (!token) return this.toastProvider.presentToast('Problemas al obtener token', 3000, 'warning');
       const alert = await this.alertController.create({
         header: 'Usuario',
