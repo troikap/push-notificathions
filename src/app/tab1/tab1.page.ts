@@ -15,13 +15,7 @@ export class Tab1Page {
   public message: string = '';
   public title: string = '';
   public image: string = '';
-  public tokens: any[] = [
-    // {token: 'awdadad', user: 'numero 1', checked: false},
-    // {token: 'bbbb', user: 'numero 2', checked: false},
-    // {token: 'awdadccccad', user: 'numero 3', checked: false},
-    // {token: 'ddddd', user: 'numero 4', checked: false},
-  ]
-
+  public tokens: any[] = [];
 
   constructor(
     private genericService: GenericService,

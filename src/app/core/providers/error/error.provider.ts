@@ -12,7 +12,7 @@ export class ErrorProvider {
 
   async errorHandler(data: any) {
     let message: string = '';
-    if (!data || !data.error || data.status == 0) return this.toastProvider.presentToast('Ya detectamos el error, estamos trabajando para poder brindarle la respuesta que necesita, agradecemos su paciencia.', 5000, 'danger');
+    if (!data || (!data.error && !data.message) || data.status == 0) return this.toastProvider.presentToast('Ya detectamos el error, estamos trabajando para poder brindarle la respuesta que necesita, agradecemos su paciencia.', 5000, 'danger');
     let error;
     if (typeof data.error == 'object') {
       try {
