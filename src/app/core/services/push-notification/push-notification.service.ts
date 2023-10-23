@@ -23,6 +23,8 @@ export class PushNotificationService {
     let permStatus = await PushNotifications.checkPermissions();
     if (permStatus.receive === 'prompt') {
       permStatus = await PushNotifications.requestPermissions();
+      console.log('registerNotifications permStatus ', permStatus);
+
     }
     if (permStatus.receive !== 'granted') {
       throw new Error('User denied permissions!');
@@ -57,6 +59,8 @@ export class PushNotificationService {
     let permStatus = await PushNotifications.checkPermissions();
     if (permStatus.receive === 'prompt') {
       permStatus = await PushNotifications.requestPermissions();
+      console.log('onlyGetPermission permStatus ', permStatus);
+      
     }
     if (permStatus.receive !== 'granted') {
       throw new Error('User denied permissions!');
