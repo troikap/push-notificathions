@@ -34,6 +34,7 @@
     "@ionic/angular": "^7.0.0",
     "@ionic/storage-angular": "^4.0.0",
     "@sentry/angular-ivy": "^7.73.0",
+    "@sentry/browser": "^7.74.1",
     "@sentry/capacitor": "^0.14.0",
     "ionicons": "^7.0.0",
     "rxjs": "~7.8.0",

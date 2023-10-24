@@ -3,6 +3,9 @@ PODS:
     - CapacitorCordova
   - CapacitorApp (5.0.6):
     - Capacitor
+  - CapacitorCommunityFcm (5.0.2):
+    - Capacitor
+    - Firebase/Messaging
   - CapacitorCordova (5.5.0)
   - CapacitorHaptics (5.0.6):
     - Capacitor
@@ -14,6 +17,11 @@ PODS:
     - Capacitor
   - CapacitorStatusBar (5.0.6):
     - Capacitor
+  - Firebase/CoreOnly (10.6.0):
+    - FirebaseCore (= 10.6.0)
+  - Firebase/Messaging (10.6.0):
+    - Firebase/CoreOnly
+    - FirebaseMessaging (~> 10.6.0)
   - FirebaseCore (10.6.0):
     - FirebaseCoreInternal (~> 10.0)
     - GoogleUtilities/Environment (~> 7.8)
@@ -71,17 +79,19 @@ PODS:
 DEPENDENCIES:
   - "Capacitor (from `../../node_modules/@capacitor/ios`)"
   - "CapacitorApp (from `../../node_modules/@capacitor/app`)"
+  - "CapacitorCommunityFcm (from `../../node_modules/@capacitor-community/fcm`)"
   - "CapacitorCordova (from `../../node_modules/@capacitor/ios`)"
   - "CapacitorHaptics (from `../../node_modules/@capacitor/haptics`)"
   - "CapacitorKeyboard (from `../../node_modules/@capacitor/keyboard`)"
   - "CapacitorLocalNotifications (from `../../node_modules/@capacitor/local-notifications`)"
   - "CapacitorPushNotifications (from `../../node_modules/@capacitor/push-notifications`)"
   - "CapacitorStatusBar (from `../../node_modules/@capacitor/status-bar`)"
-  - FirebaseMessaging
+  - Firebase/Messaging
   - "SentryCapacitor (from `../../node_modules/@sentry/capacitor`)"
 
 SPEC REPOS:
   trunk:
+    - Firebase
     - FirebaseCore
     - FirebaseCoreInternal
     - FirebaseInstallations
@@ -98,6 +108,8 @@ EXTERNAL SOURCES:
     :path: "../../node_modules/@capacitor/ios"
   CapacitorApp:
     :path: "../../node_modules/@capacitor/app"
+  CapacitorCommunityFcm:
+    :path: "../../node_modules/@capacitor-community/fcm"
   CapacitorCordova:
     :path: "../../node_modules/@capacitor/ios"
   CapacitorHaptics:
@@ -116,12 +128,14 @@ EXTERNAL SOURCES:
 SPEC CHECKSUMS:
   Capacitor: 57890b363df14d5d2d5d8461aa23e886cb34da2a
   CapacitorApp: 024e1b1bea5f883d79f6330d309bc441c88ad04a
+  CapacitorCommunityFcm: f7b5158169ea27d8a8444e0adeb17584d7997e91
   CapacitorCordova: 3d3908a3d208a11a75f9df3b18c4405c4de76e1d
   CapacitorHaptics: 1fffc1217c7e64a472d7845be50fb0c2f7d4204c
   CapacitorKeyboard: b978154b024a5f65e044908e37d15b7de58b9d12
   CapacitorLocalNotifications: c2d8b14794064fd4814b1d6c4ddbac8029afa295
   CapacitorPushNotifications: b31e326c6e4eb216a622041d6ca21a973f34943f
   CapacitorStatusBar: 565c0a1ebd79bb40d797606a8992b4a105885309
+  Firebase: f13680471b021937f2230ea8503c7809d8c29806
   FirebaseCore: fa80ad16a62d52f67274b5b88304c3a318bbf9a4
   FirebaseCoreInternal: 26233f705cc4531236818a07ac84d20c333e505a
   FirebaseInstallations: 13dde135fa0524e15bddb133ccc8465c53a1b3f3
@@ -134,6 +148,6 @@ SPEC CHECKSUMS:
   SentryCapacitor: 24d2fdc00e259b9cd9454a2331444ab6c41141be
   SentryPrivate: 4350d865f898224ab9fa02b37d6ee7fbb623f47e
 
-PODFILE CHECKSUM: dca425d714e99e9ad9ce54d36996204e001c9b99
+PODFILE CHECKSUM: 2a02e453be66cc2dcdd3aeebdbbe4d24c9154a37
 
 COCOAPODS: 1.13.0

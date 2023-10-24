@@ -6,12 +6,12 @@ use_frameworks!
 # workaround to avoid Xcode caching of Pods that requires
 # Product -> Clean Build Folder after new Cordova plugins installed
 # Requires CocoaPods 1.6 or newer
-
 install! 'cocoapods', :disable_input_output_paths => true
 
 def capacitor_pods
   pod 'Capacitor', :path => '../../node_modules/@capacitor/ios'
   pod 'CapacitorCordova', :path => '../../node_modules/@capacitor/ios'
+  pod 'CapacitorCommunityFcm', :path => '../../node_modules/@capacitor-community/fcm'
   pod 'CapacitorApp', :path => '../../node_modules/@capacitor/app'
   pod 'CapacitorHaptics', :path => '../../node_modules/@capacitor/haptics'
   pod 'CapacitorKeyboard', :path => '../../node_modules/@capacitor/keyboard'
@@ -23,8 +23,12 @@ end
 
 target 'App' do
   capacitor_pods
+  pod 'Firebase/Messaging'
   # Add your Pods here
-  pod 'FirebaseMessaging', :modular_headers => true
+end
+
+target 'pushnotificationextension' do
+  pod 'Firebase/Messaging'
 end
 
 post_install do |installer|

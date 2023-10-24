@@ -15,6 +15,8 @@ Sentry.init({
   // To set your release and dist versions
   release: "push-notifications-troikap@" + "v1.0",
   dist: "1",
+  replaysSessionSampleRate: 0.1,
+  replaysOnErrorSampleRate: 1.0,
   // Set tracesSampleRate to 1.0 to capture 100% of transactions for performance monitoring.
   // We recommend adjusting this value in production.
   tracesSampleRate: 1.0,
@@ -26,6 +28,10 @@ Sentry.init({
       ],
       routingInstrumentation: SentrySibling.routingInstrumentation,
     }),
+    new SentrySibling.Replay({
+      maskAllText: true,
+      blockAllMedia: true,
+    })
   ],
 },
 // Forward the init method to the sibling Framework.
