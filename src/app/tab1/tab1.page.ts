@@ -35,8 +35,8 @@ export class Tab1Page {
       await this.pushNotificationService.registerPush();
       setTimeout(async () => {
         const token = await this.storageProvider.getObject('TOKEN');
-        if (!token) return this.toastProvider.presentToast('Problemas al obtener token', 3000, 'warning');
         this.loadingProvider.closeLoader(loading);
+        if (!token) return this.toastProvider.presentToast('Problemas al obtener token', 3000, 'warning');
         const alert = await this.alertController.create({
           header: 'Usuario',
           subHeader: 'Ingrese el nombre de su usuario',
@@ -71,12 +71,11 @@ export class Tab1Page {
             return element;
           });
         }
+        this.loadingProvider.closeLoader(loading);
       }, 5000);
     } catch (err) {
       console.log('ERROR ', err);
       this.errorProvider.errorHandler(err);
-    } finally {
-      this.loadingProvider.closeLoader(loading);
     }
   }
 
