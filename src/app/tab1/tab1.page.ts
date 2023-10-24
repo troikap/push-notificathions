@@ -30,7 +30,7 @@ export class Tab1Page {
   async onClickSignUp() {
     try {
       await this.pushNotificationService.registerPush();
-      // setTimeout(async () => {
+      setTimeout(async () => {
         const token = await this.storageProvider.getObject('TOKEN');
         if (!token) return this.toastProvider.presentToast('Problemas al obtener token', 3000, 'warning');
         const alert = await this.alertController.create({
@@ -66,7 +66,7 @@ export class Tab1Page {
             return element;
           });
         }
-      // }, 5000);
+      }, 1000);
     } catch (err) {
       console.log('ERROR ', err);
       this.errorProvider.errorHandler(err);
