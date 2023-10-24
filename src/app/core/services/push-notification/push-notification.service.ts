@@ -14,11 +14,19 @@ export class PushNotificationService {
   ) {}
 
   async registerPush(): Promise<any>{
-    const token = await this.storageProvider.getObject('TOKEN');
-    console.log('TOKEN ?? ', token);
-    if (!token) await this.registerNotifications();
-    await this.addListeners();
-    await this.getDeliveredNotifications();
+    return new Promise(async (resolve, reject) => {
+      const token = await this.storageProvider.getObject('TOKEN');
+      console.log('TOKEN ?? ', token);
+      if (!token) await this.registerNotifications();
+      console.log('ZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZ 111111 ');
+  
+      await this.addListeners();
+      console.log('ZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZ 222222');
+  
+      await this.getDeliveredNotifications();
+      console.log('ZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZ 33333');
+      resolve(true);
+    })
   }
 
   registerNotifications = async () => {
