@@ -5,6 +5,7 @@ import { StorageProvider } from '../core/providers/storage/storage.provider';
 import { ToastProvider } from '../core/providers/toast/toast.provider';
 import { ErrorProvider } from '../core/providers/error/error.provider';
 import { AlertController } from '@ionic/angular';
+import { Capacitor } from '@capacitor/core';
 
 @Component({
   selector: 'app-tab1',
@@ -28,15 +29,9 @@ export class Tab1Page {
 
   async onClickSignUp() {
     try {
-      console.log('ZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZ');
       await this.pushNotificationService.registerPush();
-
-      console.log('YYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYY');
-      setTimeout(async () => {
+      // setTimeout(async () => {
         const token = await this.storageProvider.getObject('TOKEN');
-        console.log('RRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRr');
-  
-  
         if (!token) return this.toastProvider.presentToast('Problemas al obtener token', 3000, 'warning');
         const alert = await this.alertController.create({
           header: 'Usuario',
@@ -63,7 +58,7 @@ export class Tab1Page {
         await alert.present();
         const alertResult = await alert.onDidDismiss();
         const userName = alertResult.data.values['name'];
-        const response = await this.genericService.setToken(token, userName);
+        const response = await this.genericService.setToken(token, userName, Capacitor.getPlatform());
         if (response) {
           this.toastProvider.presentToast('Token registrado correctamente', 3000, 'success');
           this.tokens = response.data.map((element: any) => {
@@ -71,7 +66,7 @@ export class Tab1Page {
             return element;
           });
         }
-      }, 5000);
+      // }, 5000);
     } catch (err) {
       console.log('ERROR ', err);
       this.errorProvider.errorHandler(err);
