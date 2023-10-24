@@ -40,9 +40,9 @@ export class PushNotificationService {
       console.info('Registration token.value: ', token.value);
       if (Capacitor.getPlatform() === 'ios') {    
         FCM.getToken().then( async (r) => {
-          await this.storageProvider.setObject('TOKEN_DATA', r.token);
+          await this.storageProvider.setObject('TOKEN', r.token);
         }).catch((err) => console.log('Error getting token with FCM: ', err)); 
-      } else await this.storageProvider.setObject('TOKEN_DATA', token);
+      } else await this.storageProvider.setObject('TOKEN', token);
     });
     await PushNotifications.addListener('registrationError', err => {
       console.error('Registration error: ', err.error);
