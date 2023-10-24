@@ -32,7 +32,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
             } else if let token = token {
                 print("TOKEN")
                 print(token)
-                NotificationCenter.default.post(name: .capacitorDidRegisterForRemoteNotifications, object: deviceToken)
+                NotificationCenter.default.post(name: .capacitorDidRegisterForRemoteNotifications, object: token)
             }
         })
     }

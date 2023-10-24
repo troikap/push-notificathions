@@ -18,6 +18,7 @@
 		7A9A6A822AE754D000E4073B /* NotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A9A6A812AE754D000E4073B /* NotificationService.swift */; };
 		7A9A6A862AE754D000E4073B /* pushnotificationextension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 7A9A6A7F2AE754D000E4073B /* pushnotificationextension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		A084ECDBA7D38E1E42DFC39D /* Pods_App.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AF277DCFFFF123FFC6DF26C7 /* Pods_App.framework */; };
+		C512F930DED611CC9FE022A6 /* Pods_pushnotificationextension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CCD9C5B0B4C1FCC23A85C33B /* Pods_pushnotificationextension.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -81,6 +82,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C512F930DED611CC9FE022A6 /* Pods_pushnotificationextension.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -479,7 +481,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = App/App.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = UV6585T47N;
 				INFOPLIST_FILE = App/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
@@ -502,7 +504,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = App/App.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = UV6585T47N;
 				INFOPLIST_FILE = App/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
