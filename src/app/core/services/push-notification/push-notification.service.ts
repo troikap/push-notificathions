@@ -14,19 +14,11 @@ export class PushNotificationService {
   ) {}
 
   async registerPush(): Promise<any>{
-    return new Promise(async (resolve, reject) => {
-      const token = await this.storageProvider.getObject('TOKEN');
-      console.log('TOKEN ?? ', token);
-      if (!token) await this.registerNotifications();
-      console.log('ZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZ 111111 ');
-  
-      await this.addListeners();
-      console.log('ZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZ 222222');
-  
-      await this.getDeliveredNotifications();
-      console.log('ZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZ 33333');
-      resolve(true);
-    })
+    const token = await this.storageProvider.getObject('TOKEN');
+    console.log('TOKEN ?? ', token);
+    if (!token) await this.registerNotifications();
+    await this.addListeners();
+    await this.getDeliveredNotifications();
   }
 
   registerNotifications = async () => {
@@ -46,15 +38,11 @@ export class PushNotificationService {
     await PushNotifications.addListener('registration', async token => {
       console.info('Registration token: ', token);
       console.info('Registration token.value: ', token.value);
-      if (Capacitor.getPlatform() === 'ios') {
-        console.log('111111111111111111111111111');
-        
-        await this.getTokenIos();
-    console.log('5555555555555555555555555555555555555555555');
-
+      if (Capacitor.getPlatform() === 'ios') {    
+        FCM.getToken().then( async (r) => {
+          await this.storageProvider.setObject('TOKEN_DATA', r.token);
+        }).catch((err) => console.log('Error getting token with FCM: ', err)); 
       } else await this.storageProvider.setObject('TOKEN_DATA', token);
-    console.log('66666666666666666666666666666666666');
-
     });
     await PushNotifications.addListener('registrationError', err => {
       console.error('Registration error: ', err.error);
@@ -65,27 +53,6 @@ export class PushNotificationService {
     await PushNotifications.addListener('pushNotificationActionPerformed', notification => {
       console.log('Push notification action performed', notification.actionId, notification.inputValue);
     });
-  }
-
-  getTokenIos(): Promise<any> {
-    console.log('2222222222222222222222222222');
-
-    return new Promise( (resolve, reject) => {
-      FCM.getToken().then( async (r) => {
-    console.log('3333333333333333333333333333');
-
-        console.log('AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA ', r.token);
-        await this.storageProvider.setObject('TOKEN_DATA', r.token);
-    console.log('444444444444444444444444444444444');
-
-        resolve(true);
-      }).catch((err) => {
-    console.log('444444444444444 eeeeeerrror 444444444444444444');
-
-        console.log('Error getting token with FCM: ', err);
-        reject(false);
-      }); 
-    })
   }
   
   getDeliveredNotifications = async () => {

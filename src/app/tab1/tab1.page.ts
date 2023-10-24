@@ -32,44 +32,46 @@ export class Tab1Page {
       await this.pushNotificationService.registerPush();
 
       console.log('YYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYY');
-      const token = await this.storageProvider.getObject('TOKEN');
-      console.log('RRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRr');
-
-
-      if (!token) return this.toastProvider.presentToast('Problemas al obtener token', 3000, 'warning');
-      const alert = await this.alertController.create({
-        header: 'Usuario',
-        subHeader: 'Ingrese el nombre de su usuario',
-        buttons: [
-          {
-            text: 'Cancelar',
-            role: 'cancel',
-            cssClass: 'alert-button-primary'
-          },
-          {
-            text: 'Continuar',
-            role: 'confirm',
-            cssClass: 'alert-button-secondary'
-          },
-        ],
-        inputs: [
+      setTimeout(async () => {
+        const token = await this.storageProvider.getObject('TOKEN');
+        console.log('RRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRr');
+  
+  
+        if (!token) return this.toastProvider.presentToast('Problemas al obtener token', 3000, 'warning');
+        const alert = await this.alertController.create({
+          header: 'Usuario',
+          subHeader: 'Ingrese el nombre de su usuario',
+          buttons: [
             {
-              name: 'name',
-              placeholder: 'Nombre',
+              text: 'Cancelar',
+              role: 'cancel',
+              cssClass: 'alert-button-primary'
             },
-          ]
-      });
-      await alert.present();
-      const alertResult = await alert.onDidDismiss();
-      const userName = alertResult.data.values['name'];
-      const response = await this.genericService.setToken(token, userName);
-      if (response) {
-        this.toastProvider.presentToast('Token registrado correctamente', 3000, 'success');
-        this.tokens = response.data.map((element: any) => {
-          element.checked = false;
-          return element;
+            {
+              text: 'Continuar',
+              role: 'confirm',
+              cssClass: 'alert-button-secondary'
+            },
+          ],
+          inputs: [
+              {
+                name: 'name',
+                placeholder: 'Nombre',
+              },
+            ]
         });
-      }
+        await alert.present();
+        const alertResult = await alert.onDidDismiss();
+        const userName = alertResult.data.values['name'];
+        const response = await this.genericService.setToken(token, userName);
+        if (response) {
+          this.toastProvider.presentToast('Token registrado correctamente', 3000, 'success');
+          this.tokens = response.data.map((element: any) => {
+            element.checked = false;
+            return element;
+          });
+        }
+      }, 5000);
     } catch (err) {
       console.log('ERROR ', err);
       this.errorProvider.errorHandler(err);
