@@ -5,9 +5,10 @@ const parametric: any = {
   TOKENS: 'tokens',
   TOKEN: 'token',
   HELLO: 'hello',
-  TOKEN_DATA: 'token-data'
+  TOKEN_DATA: 'token-data',
+  NOTIFICATION: 'notfiication'
 };
-type StorageData = | "TOKENS" | "TOKEN" | "HELLO" | "TOKEN_DATA";
+type StorageData = | "TOKENS" | "TOKEN" | "HELLO" | "TOKEN_DATA" | "NOTIFICATION";
 
 @Injectable({
   providedIn: 'root'

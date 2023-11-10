@@ -1,12 +1,12 @@
 import { Component } from '@angular/core';
-import { GenericService } from '../core/services/generic/generic.service';
-import { PushNotificationService } from '../core/services/push-notification/push-notification.service';
-import { StorageProvider } from '../core/providers/storage/storage.provider';
-import { ToastProvider } from '../core/providers/toast/toast.provider';
-import { ErrorProvider } from '../core/providers/error/error.provider';
+import { GenericService } from '../../core/services/generic/generic.service';
+import { PushNotificationProvider } from '../../core/providers/push-notification/push-notification.provider';
+import { StorageProvider } from '../../core/providers/storage/storage.provider';
+import { ToastProvider } from '../../core/providers/toast/toast.provider';
+import { ErrorProvider } from '../../core/providers/error/error.provider';
 import { AlertController } from '@ionic/angular';
 import { Capacitor } from '@capacitor/core';
-import { LoadingProvider } from '../core/providers/loading/loading.provider';
+import { LoadingProvider } from '../../core/providers/loading/loading.provider';
 
 @Component({
   selector: 'app-tab1',
@@ -21,7 +21,7 @@ export class Tab1Page {
 
   constructor(
     private genericService: GenericService,
-    private pushNotificationService: PushNotificationService,
+    private pushNotificationProvider: PushNotificationProvider,
     private storageProvider: StorageProvider,
     private toastProvider: ToastProvider,
     private errorProvider: ErrorProvider,
@@ -32,7 +32,7 @@ export class Tab1Page {
   async onClickSignUp() {
     let loading = await this.loadingProvider.showLoading('Registrando dispositivo');
     try {
-      await this.pushNotificationService.registerPush();
+      await this.pushNotificationProvider.registerPush();
       setTimeout(async () => {
         const token = await this.storageProvider.getObject('TOKEN');
         this.loadingProvider.closeLoader(loading);
@@ -72,7 +72,7 @@ export class Tab1Page {
           });
         }
         this.loadingProvider.closeLoader(loading);
-      }, 5000);
+      }, 3000);
     } catch (err) {
       console.log('ERROR ', err);
       this.errorProvider.errorHandler(err);
@@ -144,6 +144,6 @@ export class Tab1Page {
   }
 
   onClickPermission() {
-    this.pushNotificationService.onlyGetPermission();
+    this.pushNotificationProvider.onlyGetPermission();
   }
 }

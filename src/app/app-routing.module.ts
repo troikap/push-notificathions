@@ -3,9 +3,13 @@ import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 
 const routes: Routes = [
   {
+    path: 'notification',
+    loadChildren: () => import('./page/notification/notification.module').then(m => m.NotificationPageModule)
+  },
+  {
     path: '',
-    loadChildren: () => import('./tabs/tabs.module').then(m => m.TabsPageModule)
-  }
+    loadChildren: () => import('./page/tabs/tabs.module').then(m => m.TabsPageModule)
+  },
 ];
 @NgModule({
   imports: [

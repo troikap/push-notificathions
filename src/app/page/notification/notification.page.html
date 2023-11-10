@@ -1,0 +1,16 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>
+      Notificacion
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-button (click)="onClickBack()">Volver</ion-button>
+  <br>
+  SE DEBERIA BUSCAR INFORMACION SOBRE LA NOTIFICACION {{key}}
+  <br>
+  Fue una push notification {{(type == 'NOT') ? 'sin' : (type == 'NOT-IMG') ? 'con' : ' ?? '}} imágen
+
+</ion-content>
