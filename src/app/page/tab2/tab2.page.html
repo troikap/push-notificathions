@@ -1,0 +1,30 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>
+      Tab 2 Push Notifications
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">Tab 2</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <app-explore-container name="Tab 2 page"></app-explore-container>
+  <ion-button (click)="onClickGetPushNotifications()">Obtener push</ion-button>
+
+  <ion-list *ngIf="lastPushNotifications.length > 0">
+    <ion-row>
+      <ion-col>Título</ion-col>
+      <ion-col>Texto</ion-col>
+    </ion-row>
+    <ion-row *ngFor="let pushNotification of lastPushNotifications">
+      <ion-col>{{pushNotification.title}}</ion-col>
+      <ion-col>{{pushNotification.body}}</ion-col>
+    </ion-row>
+    <ion-label ></ion-label>
+  </ion-list>
+</ion-content>
